@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q1149/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q1149/input.txt').toString().split('\n');
 const n = parseInt(input[0].split(' ')[0]) // 물이 새는 곳의 갯수
 const l = parseInt(input[0].split(' ')[1]) // 테이프의 길이
 let location_list = input[1].split(' ');

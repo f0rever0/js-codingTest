@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q1931/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q1931/input.txt').toString().split('\n');
 const meeting_number = input[0] // 회의의 수
 console.log(meeting_number)
 

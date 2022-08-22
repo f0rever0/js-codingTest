@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q2798/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q2798/input.txt').toString().split('\n');
 const n = input[0].split(' ')[0] // 카드의 갯수
 const m = input[0].split(' ')[1] // 넘지 않아야할 값
 let card_list = input[1].split(' ');

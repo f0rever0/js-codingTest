@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q11399/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q11399/input.txt').toString().split('\n');
 const peopleNumber = input[0]; // 사람들 총 인원 수 
 let people = input[1].split(' ');
 // console.log(people);

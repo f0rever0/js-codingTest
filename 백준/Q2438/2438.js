@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q2438/input.txt').toString();
+let input = fs.readFileSync('백준/Q2438/input.txt').toString();
 console.log(input);
 
 // 반복문

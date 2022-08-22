@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q10448/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q10448/input.txt').toString().split('\n');
 const num = input[0] // 입력한 총 갯수
 let nums = input.slice(1,);
 

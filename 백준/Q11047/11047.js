@@ -1,5 +1,5 @@
 const fs = require('fs');
-let input = fs.readFileSync('Q11047/input.txt').toString().split('\n');
+let input = fs.readFileSync('백준/Q11047/input.txt').toString().split('\n');
 const coin_number = input[0].split(' ')[0] // 가지고 있는 동전은 총 종류
 let cost = input[0].split(' ')[1] // 만들어야하는 동전의 총 합(금액)
 console.log(coin_number);
