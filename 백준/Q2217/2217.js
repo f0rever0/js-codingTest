@@ -1,4 +1,3 @@
-const { reverse } = require('dns');
 const fs = require('fs');
 let input = fs.readFileSync('백준/Q2217/input.txt').toString().split('\n');
 const n = input[0]
