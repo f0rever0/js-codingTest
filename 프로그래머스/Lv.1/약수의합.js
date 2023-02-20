@@ -5,5 +5,5 @@ const solution = (n) => {
   for (let i = 1; i <= n; i++) {
     if (n % i === 0) divisorList.push(i);
   }
-  return divisorList.reduce((sum, number) => (sum += number));
+  return divisorList.reduce((sum, number) => (sum + number, 0));
 };
