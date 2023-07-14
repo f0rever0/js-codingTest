@@ -2,10 +2,6 @@ const solution = (number, k) => {
   let stack = [];
 
   number.split("").map((value) => {
-    if (stack.length === 0) {
-      stack.push(value);
-    }
-
     while (k > 0 && stack[stack.length - 1] < value) {
       stack.pop();
       k--;
@@ -14,10 +10,11 @@ const solution = (number, k) => {
     stack.push(value);
   });
 
-  stack.splice(stack.length - k, k);
-  let answer = stack.join("");
-
-  return answer;
+  if (k === 0) {
+    return stack.join("");
+  } else {
+    return stack.join("").substring(0, stack.length - k);
+  }
 };
 
 // ! 10번 케이스에서 시간 초과
