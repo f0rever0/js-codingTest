@@ -1,4 +1,38 @@
 function solution(storey) {
+  // 올림 자리 0 추가
+  let numberList = [
+    0,
+    ...storey
+      .toString()
+      .split("")
+      .map((n) => Number(n)),
+  ];
+
+  let count = 0;
+
+  for (let index = numberList.length - 1; index >= 0; index--) {
+    let number = numberList[index];
+    if (number < 5) {
+      count += number;
+    } else if (number > 5) {
+      count += 10 - number;
+      numberList[index - 1] = numberList[index - 1] + 1;
+    } else {
+      // number === 5
+      if (numberList[index - 1] < 5) {
+        count += number;
+      } else {
+        count += 10 - number;
+        numberList[index - 1] = numberList[index - 1] + 1;
+      }
+    }
+  }
+
+  return count;
+}
+
+/*
+function solution(storey) {
   let num = storey;
   let count = 0;
 
@@ -42,3 +76,4 @@ function down(number) {
   }
   return downlist.join("");
 }
+*/
