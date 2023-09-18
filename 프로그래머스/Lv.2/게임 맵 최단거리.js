@@ -1,30 +1,35 @@
 const solution = (maps) => {
-  // 최단 거리 구하기 -> bfs
-  const dy = [1, 0, -1, 0];
-  const dx = [0, 1, 0, -1];
-  const queue = [];
-  queue.push([0, 0, 1]); // [y좌표, x좌표, 이동횟수]
+  const moves = [
+    [1, 0],
+    [0, 1],
+    [-1, 0],
+    [0, -1],
+  ];
+  let queue = [[0, 0, 1]];
+  const endNode = [maps.length - 1, maps[0].length - 1];
 
-  while (queue.length) {
-    const [currentY, currentX, count] = queue.shift();
-    if (currentY === maps.length - 1 && currentX === maps[0].length - 1)
+  while (queue.length !== 0) {
+    let [curX, curY, count] = queue.shift();
+
+    if (curX === endNode[0] && curY === endNode[1]) {
       return count;
-
-    for (let i = 0; i < 4; i++) {
-      const ny = currentY + dy[i];
-      const nx = currentX + dx[i];
-      if (
-        ny >= 0 &&
-        ny < maps.length &&
-        nx >= 0 &&
-        nx < maps[0].length &&
-        maps[ny][nx] === 1
-      ) {
-        queue.push([ny, nx, count + 1]);
-        maps[ny][nx] = 0;
-      }
     }
-  }
 
+    moves.forEach((move) => {
+      let x = curX + move[0];
+      let y = curY + move[1];
+
+      if (
+        x >= 0 &&
+        x < maps.length &&
+        y >= 0 &&
+        y < maps[0].length &&
+        maps[x][y] === 1
+      ) {
+        queue.push([x, y, count + 1]);
+        maps[x][y] = 0;
+      }
+    });
+  }
   return -1;
 };
