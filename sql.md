@@ -1,9 +1,76 @@
-SELECT
+```md
+# 적는 순서
+
+SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY - LIMIT
+
+# 실행 순서
+
+FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY - LIMIT
+
+# 적는 순서
+
+SELECT - FROM - WHERE - GROUP BY - HAVING - ORDER BY - LIMIT
+
+# 실행 순서
+
+FROM - WHERE - GROUP BY - HAVING - SELECT - ORDER BY - LIMIT₩
+```
+
+### SELECT
+
 -> 중복제거 : SELECT DISTINCE COLUMN FROM TABLE
-JOIN -> 기본 INNER JOIN (교집합), OUTER JOIN(합집합)
-WHERE LIKE (조건) -> A\__ , %A (_:정해진 글자 수, % : 글자 수 상관없음)
+
+### JOIN -> 기본 INNER JOIN (교집합), OUTER JOIN(합집합)
+
+https://superman28.tistory.com/23
+
+#### LEFT OUTER JOIN
+
+https://chanhuiseok.github.io/posts/db-7/
 
 ```sql
+천재지변으로 인해 일부 데이터가 유실되었습니다. 입양을 간 기록은 있는데, 보호소에 들어온 기록이 없는 동물의 ID와 이름을 ID 순으로 조회하는 SQL문을 작성해주세요.
+
+SELECT O.ANIMAL_ID, O.NAME
+FROM ANIMAL_OUTS O LEFT OUTER JOIN ANIMAL_INS I
+ON I.ANIMAL_ID = O.ANIMAL_ID
+WHERE I.ANIMAL_ID IS NULL
+ORDER BY O.ANIMAL_ID
+
+왼쪽에 outs는 무조건 데리고 오고 , 거기서 ins가 없는건 null처리
+outs가 더 크니까 여기서는 left가 outs
+
+```
+
+```sql
+PRODUCT 테이블과 OFFLINE_SALE 테이블에서 상품코드 별 매출액(판매가 * 판매량) 합계를 출력하는 SQL문을 작성해주세요. 결과는 매출액을 기준으로 내림차순 정렬해주시고 매출액이 같다면 상품코드를 기준으로 오름차순 정렬해주세요.
+
+
+SELECT P.PRODUCT_CODE , SUM(P.PRICE * O.SALES_AMOUNT) AS 'SALES'
+FROM PRODUCT P INNER JOIN OFFLINE_SALE  O
+ON P.PRODUCT_ID = O.PRODUCT_ID
+GROUP BY P.PRODUCT_CODE
+ORDER BY SALES DESC , P.PRODUCT_CODE ASC;
+
+'경제' 카테고리에 속하는 도서들의 도서 ID(BOOK_ID), 저자명(AUTHOR_NAME), 출판일(PUBLISHED_DATE) 리스트를 출력하는 SQL문을 작성해주세요.
+결과는 출판일을 기준으로 오름차순 정렬해주세요
+
+
+SELECT B.BOOK_ID, A.AUTHOR_NAME, DATE_FORMAT(B.PUBLISHED_DATE, "%Y-%m-%d") as PUBLISHED_DATE
+FROM BOOK B INNER JOIN AUTHOR A
+ON B.AUTHOR_ID = A.AUTHOR_ID
+WHERE CATEGORY = "경제"
+ORDER BY PUBLISHED_DATE ASC
+```
+
+### WHERE LIKE (조건) -> A\__ , %A (_:정해진 글자 수, % : 글자 수 상관없음)
+
+```sql
+SELECT ...
+FROM ...
+WHERE ID BETWEEN 10 AND 40
+
+
 SELECT CATEGORY,PRICE as MAX_PRICE,PRODUCT_NAME
 FROM FOOD_PRODUCT
 WHERE (PRICE) IN (SELECT MAX(PRICE) FROM FOOD_PRODUCT GROUP BY CATEGORY)
@@ -13,23 +80,21 @@ ORDER BY PRICE DESC
 
 ---
 
-SUM
-MAX
+### SUM
+
+### MAX
 
 ```sql
 SELECT MAX(PRICE) AS MAX_PRICE FROM PRODUCT
 ```
 
-MIN
-COUNT -> COUNT (DISTINCT NAME) : NAME열에서 중복 제거한 개수
+### MIN
+
+### COUNT -> COUNT (DISTINCT NAME) : NAME열에서 중복 제거한 개수
 
 ---
 
 = , <=, <>(!==)
-
-SELECT ...
-FROM ...
-WHERE ID BETWEEN 10 AND 40
 
 ASC : 오름차순
 DESC : 내림차순
@@ -64,7 +129,10 @@ FLOOR(숫자)
 
 ---
 
-// GROUP BY
+### GROUP BY
+
+#### COUNT(\*)는 모든 행의 개수를 센다
+
 이 쿼리는 같은 도시에 살고있는 사람들을 그룹핑한다음에 그 도시에 사는 사람들이 가진 돈의 총합을 구하는 쿼리다.
 
 ```sql
@@ -118,7 +186,8 @@ ORDER BY CAR_TYPE ASC;
 
 ---
 
-// 실행 순서
+### 실행 순서
+
 SELECT - 5순위 (필수)
 
 FROM - 1순위 (필수)
@@ -135,7 +204,7 @@ ORDER BY - 6순위
 
 ---
 
-// DATE
+### DATE
 
 ```sql
 # 각 연/월/일을 가져오기
@@ -160,7 +229,7 @@ TIMESTAMPDIFF(단위, 날짜1, 날짜2) => 단위 기준
 
 ---
 
-// NULL 처리
+### NULL 처리
 
 ```sql
 SELECT ANIMAL_TYPE,	IFNULL(NAME,'No name') AS NAME, SEX_UPON_INTAKE FROM ANIMAL_INS
@@ -168,3 +237,7 @@ ORDER BY ANIMAL_ID ASC
 
 -> NAME 에 null 있으면 'No name' 으로 처리하기
 ```
+
+### LIMIT
+
+LIMIt 3 -> 3행까지만 조회, 맨 마지막 줄에 적기
