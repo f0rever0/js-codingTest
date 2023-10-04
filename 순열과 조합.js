@@ -59,3 +59,34 @@ function getCombinations(array, selectNumber) {
 
 console.log("조합", getCombinations([1, 2, 3, 4], 3));
 // 조합 [ [ 1, 2, 3 ], [ 1, 2, 4 ], [ 1, 3, 4 ], [ 2, 3, 4 ] ]
+
+// 현대 코테 조합
+function solution(mmr) {
+  let list = [];
+  let temp = [];
+  for (let k = 0; k < mmr.length / 2; k++) {
+    temp.push(k);
+  }
+  list.push(temp);
+
+  const total = mmr.reduce((acc, cur) => acc + cur, 0);
+  for (let j = 0; j < mmr.length / 2; j++) {
+    for (let i = mmr.length / 2; i < mmr.length; i++) {
+      let deepCopy = [...list[0]];
+      deepCopy[j] = i;
+      list.push(deepCopy);
+    }
+  }
+
+  let min = total;
+
+  list.forEach((item) => {
+    let sum = 0;
+    item.forEach((index) => {
+      sum += mmr[index];
+    });
+    let rest = total - sum;
+    if (min > Math.abs(sum - rest)) min = Math.abs(sum - rest);
+  });
+  return min;
+}
